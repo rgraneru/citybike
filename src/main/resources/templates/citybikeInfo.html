@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<table>
+    <tr>
+        <th>Navnet på sykkelstasjonen</th>
+        <th>Antall ledige sykler</th>
+        <th>Antall ledige låser</th>
+    </tr>
+    <th:block th:each="station : ${stations}">
+        <tr>
+            <td th:text="${station.title}"></td>
+            <td th:text="${station.numberOfBikesAvailable}"></td>
+            <td th:text="${station.numberOfLocksAvailable}"></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
