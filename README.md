@@ -8,11 +8,11 @@ To compile type: mvn clean install
 To run, either run Application
 or use maven: mvn spring-boot:run
 
-Alternativly, instead of updating application.properties, you can add the property at runtime: 
+Alternatively, instead of updating application.properties, you can add the property at runtime: 
 
-When running Application, add --Identifier=YOUR_IDENTIFIER_HERE   
+When running Application, add --identifier=YOUR_IDENTIFIER_HERE   
 or
-If you use maven, type mvn spring-boot:run -Dspring-boot.run.arguments=--Identifier=YOUR_IDENTIFIER_HERE 
+If you use maven, type mvn spring-boot:run -Dspring-boot.run.arguments=--identifier=YOUR_IDENTIFIER_HERE 
 
 
 
