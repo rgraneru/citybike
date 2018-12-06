@@ -1,5 +1,7 @@
 package citybike.model;
 
+import java.util.Optional;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -29,10 +31,10 @@ public class Station {
     }
 
     public long getNumberOfBikesAvailable() {
-        return availability == null ? -1 : availability.getBikes();
+        return Optional.ofNullable(availability).map(Availability::getBikes).orElse((long) -1);
     }
 
     public long getNumberOfLocksAvailable() {
-        return availability == null ? -1 : availability.getLocks();
+        return Optional.ofNullable(availability).map(Availability::getLocks).orElse((long) -1);
     }
 }
