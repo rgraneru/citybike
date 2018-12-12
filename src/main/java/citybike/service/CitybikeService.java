@@ -1,34 +1,29 @@
 package citybike.service;
 
+import citybike.model.Station;
+import citybike.model.Stations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.*;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
-import citybike.model.Station;
-import citybike.model.Stations;
-
 @Service
 public class CitybikeService {
-
+    @Autowired
     private RestTemplate restTemplate;
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        restTemplate = builder.build();
-        return restTemplate;
+        return builder.build();
     }
 
     @Value( "${identifier}" )
@@ -41,8 +36,8 @@ public class CitybikeService {
         //First get a list of IDs and StationNames
         List<Station> stationNames = getStationInfo("/stations");
 
-        //Convert to map for easy access to title given id
-        Map<String, String> tempNameMap = stationNames.stream()
+        //Convert to map for easy access to title given id. Collectors.toMap cannot deal with null-values as a map-value, so we need to filter those
+        Map<String, String> tempNameMap = stationNames.stream().filter(station -> station.getTitle() != null)
                 .collect(Collectors.toMap(Station::getId, Station::getTitle));
 
         //Get a list of stations and their availability removing those with no data

@@ -24,11 +24,9 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
-
     <properties>
         <java.version>1.8</java.version>
     </properties>
